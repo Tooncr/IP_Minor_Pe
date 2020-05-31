@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{Edit}"></title>
+</head>
+<body>
+<h1 th:text="#{Edit}"></h1>
+
+<form th:object="${task}" th:method="post">
+    <h2 th:text="#{Edit}"></h2>
+    <div>
+        <label for="title"> <span th:text="#{title}"></span>: </label>
+        <input type="text" name="title" id="title" th:value="*{title}">
+    </div>
+    <div>
+        <label for="description"><span th:text="#{description}"></span>: </label>
+        <input type="text" name="description" id="description"th:value="*{description}">
+    </div>
+    <div>
+        <label for="time"> <span th:text="#{date}"></span>: </label>
+        <input type="datetime-local" name="time" id="time" th:value="*{time}">
+    </div>
+
+    <input type="submit" th:text="#{Edit}">
+</form>
+
+<button><a th:href="@{/tasks}"><span th:text="#{OverviewButton}"></span></a></button>
+<button><a th:href="@{/}"><span th:text="#{IndexButton}"></span></a></button>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{Detail}"></title>
+</head>
+<body>
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.eng}"></option>
+    <option value="nl" th:text="#{lang.nl}"></option>
+</select>
+<h1 th:text="#{Detail}"></h1>
+
+<div th:if="${task != null}">
+    <p><span th:text="${task.title}"></span></p>
+    <p><span th:text="${task.description}"></span></p>
+    <p><span th:text="#{due} + ${task.time.dayOfMonth} +'/' + ${task.time.month} + '/' +${task.time.year} "></span></p>
+    <p> SubTasks <br>
+        <ul>
+            <li th:each="subtask : ${subtasks}">
+                <span th:text="${subtask.title}"></span> <br>
+                <span th:text="${subtask.description}"></span> <br>
+            </li>
+        </ul>
+    </p>
+
+    <button><a th:href="@{__${task.id}__/sub/createtask}"><span th:text="#{addsubtask}"></span></a></button>
+</div>
+
+<div th:if="${task} == null">
+    <span th:text="#{NotaskId}"></span>
+</div>
+
+<button><a th:href="@{/tasks}"><span th:text="#{OverviewButton}"></span></a></button><br>
+<button><a th:href="@{/}"><span th:text="#{IndexButton}"></span></a></button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                window.location.replace('?lang=' + selectedOption);
+            }
+        });
+    });
+</script>
+</body>
+</html>
